@@ -180,10 +180,11 @@ namespace RaidBot.BusinessLogic.Raids {
                return result;
             }
          }
-
+         
          raidTime = raidTime.Replace(".", ":").Replace(",", ":").Replace(";", ":");
+         string[] colonFormat = new string[] {"H:mm","Hmm","HHMM"} //Sets non delimited formats into an array to call in DateTime
          DateTime time;
-         if (DateTime.TryParseExact(raidTime, "H:mm", CultureInfo.InvariantCulture, DateTimeStyles.None, out time)) {
+         if (DateTime.TryParseExact(raidTime, colonFormat, CultureInfo.InvariantCulture, DateTimeStyles.None, out time)) { 
             if (time > DateTime.Now.AddHours(_permissions.TimeZone)) {
                Raid raid = new Raid() {
                   Name = raidName,
